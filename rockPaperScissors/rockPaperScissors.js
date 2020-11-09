@@ -27,10 +27,8 @@ var rockPaperScissors = function (rounds) {
   for (i = 0; i < total; i++) {
     result.push('');
   }
-
   for (h = 0; h < rounds; h++) {
     var incrementer = Math.pow(3, h)
-
     var counter = 0;
     for (j = 0; j < total; j++) {
       if (counter %3 === 0 || counter === 0) {
@@ -45,7 +43,6 @@ var rockPaperScissors = function (rounds) {
       }
     }
   }
-
   return result;
 };
 
