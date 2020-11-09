@@ -19,6 +19,9 @@
 */
 
 var rockPaperScissors = function (rounds) {
+  if (arguments.length === 0) {
+    return rockPaperScissors(3);
+  }
   if (rounds > 10) {
     return 'There are ' + (Math.pow(3, rounds)) + ' different possible combinations for this many rounds. Please enter a number 10 or lower to see all possible combinations.'
   }
