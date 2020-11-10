@@ -25,6 +25,9 @@ var rockPaperScissors = function (rounds) {
   if (rounds > 10) {
     return 'There are ' + (Math.pow(3, rounds)) + ' different possible combinations for this many rounds. Please enter a number 10 or lower to see all possible combinations.'
   }
+  if (rounds < 1 || typeof rounds !== 'number') {
+    return 'Please enter a positive integer'
+  }
   var result = [];
   var total = Math.pow(3, rounds);
   for (i = 0; i < total; i++) {
