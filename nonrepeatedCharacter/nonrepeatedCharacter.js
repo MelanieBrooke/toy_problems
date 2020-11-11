@@ -7,5 +7,14 @@
  */
 
 var firstNonRepeatedCharacter = function(string) {
-  // TODO: your solution here
+  if (typeof string !== 'string' || string.length === 0 || arguments.length === 0) {
+    return 'Please enter a valid string';
+  }
+  for (var i = 0; i < string.length; i++) {
+    let char = string[i];
+    if ((string.indexOf(char, i + 1) === -1) && (string.indexOf(char) === i)) {
+      return char;
+    }
+  }
+  return 'no non-repeating characters';
 };
