@@ -8,7 +8,7 @@
 
 var firstNonRepeatedCharacter = function(string) {
   if (typeof string !== 'string' || string.length === 0 || arguments.length === 0) {
-    return 'Please enter a valid string';
+    return null;
   }
   for (var i = 0; i < string.length; i++) {
     let char = string[i];
@@ -16,5 +16,5 @@ var firstNonRepeatedCharacter = function(string) {
       return char;
     }
   }
-  return 'no non-repeating characters';
+  return null;
 };
