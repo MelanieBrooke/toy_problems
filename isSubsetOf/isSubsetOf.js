@@ -23,13 +23,45 @@
 
 // Before extra credit version:
 
+// Array.prototype.isSubsetOf = function (arr) {
+//   if (arguments.length === 0) {
+//       return false;
+//   }
+//   for (i = 0; i < this.length; i++) {
+//     if (arr.indexOf(this[i]) === -1) {
+//       return false;
+//     }
+//   }
+//   return true;
+// };
+
 Array.prototype.isSubsetOf = function (arr) {
   if (arguments.length === 0) {
-      return false;
+    return false;
   }
-  for (i = 0; i < this.length; i++) {
-    if (arr.indexOf(this[i]) === -1) {
-      return false;
+  var context = this;
+  var input = arr;
+  for (j = 0; j < input.length; j++) {
+    if ((typeof input[j] === 'object') && (!Array.isArray(input[j]))) {
+      input[j] = JSON.stringify(input[j]);
+    }
+  }
+  for (i = 0; i < context.length; i++) {
+    if (typeof context[i] === 'object') {
+      context[i] = JSON.stringify(context[i]);
+    }
+//       if (Array.isArray(this[i])) {
+//           console.log('this is an array');
+//           for (j = 0; j < arr.length; j++) {
+//               if (Array.isArray(arr[j])) {
+//                   if (this[i].isSubsetOf(arr[j])) {
+
+//                   }
+//               }
+//           }
+//       }
+    if (input.indexOf(context[i]) === -1) {
+          return false;
     }
   }
   return true;
