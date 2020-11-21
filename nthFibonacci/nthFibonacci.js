@@ -22,19 +22,19 @@
 
 // Recursive version
 
-var nthFibonacci = function (n) {
-  if (n === 0) {
-    return 0;
-  }
-  var addingMachine = function(x, y, counter) {
-    if (counter === 0) {
-      return y;
-    } else {
-      return addingMachine(y, (x + y), (counter - 1));
-    }
-  };
-  return addingMachine(0, 1, n-1);
-};
+// var nthFibonacci = function (n) {
+//   if (n === 0) {
+//     return 0;
+//   }
+//   var addingMachine = function(x, y, counter) {
+//     if (counter === 0) {
+//       return y;
+//     } else {
+//       return addingMachine(y, (x + y), (counter - 1));
+//     }
+//   };
+//   return addingMachine(0, 1, n-1);
+// };
 
 // Iterative version
 
