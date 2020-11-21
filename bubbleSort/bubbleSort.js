@@ -32,7 +32,27 @@
 
 // Feel free to add helper functions if needed.
 
+// Time complexity: Somewhere between O(n)/linear and O(n^2)/quadratic?
+// Will be asking about this after time is up
+// EC: If no swaps are needed (meaning array is already sorted), time complexity is O(n)/linear
+
 
 var bubbleSort = function(array) {
-  // Your code here.
+  var swaps = 0;
+  for (i = 0; i < array.length; i++) {
+    if (array[i + 1] !== undefined) {
+      var tempVal1 = array[i];
+      var tempVal2 = array[i + 1];
+      if (array[i] > array[i + 1]) {
+        array[i] = tempVal2;
+        array[i+1] = tempVal1;
+        swaps += 1;
+      }
+    }
+  }
+  if (swaps === 0) {
+    return array;
+  } else {
+    return bubbleSort(array);
+  }
 };
