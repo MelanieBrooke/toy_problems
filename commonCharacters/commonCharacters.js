@@ -15,15 +15,19 @@ var commonCharacters = function(string1, string2) {
     return undefined;
   }
   var commonChars = '';
-  for (i = 0; i < string1.length; i++) {
-    if (string2.includes(string1[i]) && !commonChars.includes(string1[i]) && string1[i] !== ' ') {
-      commonChars += string1[i];
+
+  var concatFunction = function(first, second) {
+    var common = '';
+    for (i = 0; i < first.length; i++) {
+      if (second.includes(first[i]) && !common.includes(first[i]) && first[i] !== ' ') {
+        common += first[i];
+      }
     }
-  }
-  if (arguments.length > 2) {
-    for (i = 2; i < arguments.length; i++) {
-      return commonCharacters(commonChars, arguments[i]);
-    }
+    return common;
+  };
+
+  for (j = 1; j < arguments.length; j++) {
+    commonChars = concatFunction(concatFunction(string1, string2), arguments[j]);
   }
   return commonChars;
 };
