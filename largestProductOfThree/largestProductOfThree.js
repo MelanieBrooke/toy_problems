@@ -19,7 +19,7 @@ var largestProductOfThree = function(array) {
     }
   }
 
-  var biggest = 0;
+  var biggest = array[0] * array[1] * array[2];
   for (i = 0; i < array.length; i++) {
     for (j =  i + 1; j < array.length; j++) {
       for (k = j + 1; k < array.length; k++) {
