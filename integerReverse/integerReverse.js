@@ -9,10 +9,10 @@
 *
 */
 
-function integerReverse(number){
-  if (typeof number !== 'number' || number < 1) {
-    return undefined;
-  }
+function reverseInteger(number){
+  // if (typeof number !== 'number' || number < 1) {
+  //   return undefined;
+  // }
   TBRnumber = Math.floor(number);
   var reverseNum = 0;
   while (TBRnumber > 0) {
