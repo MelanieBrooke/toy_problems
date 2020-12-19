@@ -9,7 +9,7 @@
 *
 */
 
-function reverseInteger(number){
+function integerReverse(number){
   if (typeof number !== 'number' || number < 1) {
     return undefined;
   }
