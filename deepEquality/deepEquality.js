@@ -16,7 +16,7 @@
   var result = true;
   var equal = function(apple, orange) {
     if (Object.keys(apple).length !== Object.keys(orange).length) {
-      return false;
+      result = false;
     }
     for (var key in apple) {
       if (orange[key] === undefined) {
