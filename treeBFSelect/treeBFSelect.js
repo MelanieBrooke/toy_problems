@@ -87,7 +87,9 @@ Tree.prototype.BFSelect = function(filter) {
     }
   };
 
-  bf(this, depth);
+  if (this.children.length) {
+    bf(this, depth);
+  }
   return filteredArray;
 };
 
