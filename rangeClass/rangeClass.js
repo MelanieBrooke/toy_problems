@@ -58,13 +58,27 @@ Range.prototype.each = function (callback) {
 };
 
 Range.prototype.includes = function (val) {
-  var result = false;
-  for (var i = this.start; i < this.end + 1; i += this.step) {
-    if (i === val) {
-      result = true;
-    };
+  if (this.start === val || this.end === val) {
+    return true;
   }
-  return result;
+  if (val > this.end || val < this.start) {
+    return false;
+  }
+  var num = (val - this.start) / this.step;
+  var wholeNum = Math.floor(num);
+  if (num === wholeNum) {
+    return true;
+  }
+  return false;
 };
 
-// var range = new Range(1);
+// var range = new Range(4, 82, 3);
+// console.log(range.includes(2));
+// console.log(range.includes(9));
+// console.log(range.includes(3));
+// console.log(range.includes(10));
+// var range2 = new Range(3, 82, 3);
+// console.log(range2.includes(2));
+// console.log(range2.includes(9));
+// console.log(range2.includes(3));
+// console.log(range2.includes(10));
