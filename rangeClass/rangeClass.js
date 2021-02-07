@@ -41,10 +41,12 @@
 
 var Range = function(start, end, step) {
   this.start = start || null,
-  this.end = end || start,
+  this.end = end,
   this.step = step || 1
   this.backwards = this.start > this.end;
-
+  if (this.end === undefined) {
+    this.end = this.start;
+  }
 };
 
 Range.prototype.size = function () {
@@ -128,3 +130,10 @@ Range.prototype.includes = function (val) {
 // console.log(backwardsRange.includes(81));
 // console.log(backwardsRange.includes(76));
 // console.log(backwardsRange.includes(75));
+
+// var countdown = new Range(10);
+// countdown.each(function(val) {
+//   console.log(val);
+// })
+// console.log(countdown.size());
+// console.log(countdown.end)
