@@ -40,7 +40,7 @@
 
 
 var Range = function(start, end, step) {
-  this.start = start,
+  this.start = start || null,
   this.end = end || start,
   this.step = step || 1
   this.backwards = this.start > this.end;
@@ -48,6 +48,9 @@ var Range = function(start, end, step) {
 };
 
 Range.prototype.size = function () {
+  if (this.start === null) {
+    return null;
+  }
   if (this.backwards === false) {
     var size = (this.end - this.start) / this.step + 1;
   } else {
@@ -57,12 +60,24 @@ Range.prototype.size = function () {
 };
 
 Range.prototype.each = function (callback) {
-  for (var i = this.start; i < this.end + 1; i += this.step) {
-    callback(i);
+  if (this.start === null) {
+    return null;
+  }
+  if (this.backwards === false) {
+    for (var i = this.start; i <= this.end; i += this.step) {
+      callback(i);
+    }
+  } else {
+    for (var j = this.start; j >= this.end; j -= Math.abs(this.step)) {
+      callback(j);
+    }
   }
 };
 
 Range.prototype.includes = function (val) {
+  if (this.start === null) {
+    return null;
+  }
   if (this.start === val || this.end === val) {
     return true;
   }
@@ -88,6 +103,9 @@ Range.prototype.includes = function (val) {
   return false;
 };
 
+
+//testing files
+
 // var range = new Range(4, 82, 3);
 // console.log(range.includes(2));
 // console.log(range.includes(9));
@@ -102,10 +120,11 @@ Range.prototype.includes = function (val) {
 //   console.log(val);
 // }))
 
-var backwardsRange = new Range(81, 4, -5);
-console.log('size: ', backwardsRange.size());
-console.log(backwardsRange.each(function(val) {
-  console.log(val);
-}))
+// var backwardsRange = new Range(81, 4, -5);
+// console.log('size: ', backwardsRange.size());
+// backwardsRange.each(function(val) {
+//   console.log(val);
+// });
+// console.log(backwardsRange.includes(81));
 // console.log(backwardsRange.includes(76));
 // console.log(backwardsRange.includes(75));
