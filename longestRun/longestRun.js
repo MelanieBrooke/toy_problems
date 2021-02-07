@@ -14,7 +14,29 @@
  */
 
 var longestRun = function (string) {
-  // TODO: Your code here!
+  if (string.length === 0) {
+    return null;
+  }
+  var longest = [0, 0];
+  var indices = [0, 0];
+  for (i = 0; i < string.length; i++) {
+    if (string[i] === string[i + 1]) {
+      indices.splice(0, 1, i);
+      for (j = i + 1; j < string.length; j++) {
+        if (string[j] !== string[i]) {
+          indices.splice(1, 1, (j-1));
+          if (indices[1] - indices [0] > longest[1] - longest[0]) {
+            longest[0] = indices[0];
+            longest[1] = indices[1];
+            // longest = indices;
+          }
+          break;
+        }
+      }
+    }
+  }
+  console.log(indices);
+  return longest;
 };
 
 // If you need a random string generator, use this!
