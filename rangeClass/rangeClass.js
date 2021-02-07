@@ -64,7 +64,7 @@ Range.prototype.each = function (callback) {
     return null;
   }
   if (this.backwards === false) {
-    for (var i = this.start; i <= this.end; i += this.step) {
+    for (var i = this.start; i <= this.end; i += Math.abs(this.step)) {
       callback(i);
     }
   } else {
