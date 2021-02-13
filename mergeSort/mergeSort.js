@@ -106,45 +106,43 @@ var mergeSort = function(array) {
     sortedArray.push(subset);
   }
 
-  // Figured out my issue but because of battles with VSCode bugging out, ran out of time to implement. Will finish later today.
-  var mergeTwo = function(arrays) {
-//     console.log('starting mergeTwo');
-    if (arrays.length > 1) {
-//       console.log('entering first loop');
-      for (var j = 0; j < arrays.length; j+=2) {
-//         console.log('arrays: ', arrays[j], arrays[j + 1]);
-        var first = arrays[j];
-        var second = arrays[j + 1];
-//         console.log('arrays redefined: ', first, second)
-        if (second !== undefined) {
-          if (second[0] < first[0]) {
-            first.unshift(second[0]);
-            second.splice(0, 1);
-//             console.log('arrays are now...', first, second)
-          }
-          var firstIndex = 1;
-          for (var k = 0; k < second.length; k++) {
-            if (second[k] < first[firstIndex]) {
-              first.splice(firstIndex, 0, second[k]);
-            } else {
-// finish later, get VSCode working right
-            }
-          }
-        }
+  var mergeTwo = function(first, second) {
+    if (second[0] < first[0]) {
+      first.unshift(second[0]);
+      second.splice(0, 1);
+    }
+    var firstIndex = 0;
+    for (var k = 0; k < second.length; k++) {
+      insert(second[k], first, firstIndex)
+    }
+  };
+
+  var insert = function(num, array, index) {
+    if (index === array.length - 1) {
+      array.push(num);
+    } else if (num < array[index]) {
+      array.splice(index, 0, num);
+    } else if (num === array[index]) {
+      array.splice(index + 1, 0, num)
+    } else if (num > array[index]) {
+      index += 1;
+      insert(num, array, index);
+    }
+    return;
+  };
+
+  while (sortedArray.length > 1) {
+    for (var j = 0; j < sortedArray.length; j +=1) {
+      if (sortedArray[j+1] !== undefined) {
+        mergeTwo(sortedArray[j], sortedArray[j + 1]);
+        sortedArray.splice(j+1, 1);
       }
     }
   }
-  mergeTwo(sortedArray);
-  return sortedArray;
+
+  return sortedArray[0];
 };
 
-var array1 = [4,7,4,3,9,1,2]
-console.log(mergeSort(array1)) // should be [1, 2, 3, 4, 4, 7, 9]
-  }
+// var array1 = [4,7,4,3,9,1,2]
+// console.log(mergeSort(array1)) // should be [1, 2, 3, 4, 4, 7, 9]
 
-  // Separate input array into individual arrays
-  // If some sections are already sorted, leave them as such
-  // helper function
-  // take two arrays at a time and merge them into one array that replaces the individuals? Or merge into the first and delete the second
-  // continue this until there is only one left
-  // return the final sorted array
