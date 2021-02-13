@@ -105,28 +105,25 @@ var mergeSort = function(array) {
     subset.push(array[i]);
     sortedArray.push(subset);
   }
+  var firstIndex = 0;
 
   var mergeTwo = function(first, second) {
-    if (second[0] < first[0]) {
-      first.unshift(second[0]);
-      second.splice(0, 1);
-    }
-    var firstIndex = 0;
+    firstIndex = 0;
     for (var k = 0; k < second.length; k++) {
       insert(second[k], first, firstIndex)
     }
   };
 
   var insert = function(num, array, index) {
-    if (index === array.length - 1) {
-      array.push(num);
-    } else if (num < array[index]) {
+    if (num < array[index]) {
       array.splice(index, 0, num);
     } else if (num === array[index]) {
       array.splice(index + 1, 0, num)
+    } else if (firstIndex === array.length - 1) {
+      array.push(num);
     } else if (num > array[index]) {
-      index += 1;
-      insert(num, array, index);
+      firstIndex += 1;
+      insert(num, array, firstIndex);
     }
     return;
   };
@@ -143,6 +140,6 @@ var mergeSort = function(array) {
   return sortedArray[0];
 };
 
-// var array1 = [4,7,4,3,9,1,2]
+// var array1 = [4,7,4,3,9,1,2, 234, 24, 43, 23,43, 54, 12, 11]
 // console.log(mergeSort(array1)) // should be [1, 2, 3, 4, 4, 7, 9]
 
