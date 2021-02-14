@@ -95,7 +95,15 @@
  *
  */
 
+// var mergeSort = function(array) {
 
+// }
+
+
+
+////////////////
+// ITERATIVE VERSION - TIME COMPLEXITY=BAD
+////////////////
 
 var mergeSort = function(array) {
   var sortedArray = [];
@@ -117,8 +125,10 @@ var mergeSort = function(array) {
   var insert = function(num, array, index) {
     if (num < array[index]) {
       array.splice(index, 0, num);
+      firstIndex += 1;
     } else if (num === array[index]) {
       array.splice(index + 1, 0, num)
+      firstIndex += 1;
     } else if (firstIndex === array.length - 1) {
       array.push(num);
     } else if (num > array[index]) {
@@ -129,7 +139,7 @@ var mergeSort = function(array) {
   };
 
   while (sortedArray.length > 1) {
-    for (var j = 0; j < sortedArray.length; j +=1) {
+    for (var j = 0; j < sortedArray.length; j += 1) {
       if (sortedArray[j+1] !== undefined) {
         mergeTwo(sortedArray[j], sortedArray[j + 1]);
         sortedArray.splice(j+1, 1);
@@ -140,6 +150,6 @@ var mergeSort = function(array) {
   return sortedArray[0];
 };
 
-// var array1 = [4,7,4,3,9,1,2, 234, 24, 43, 23,43, 54, 12, 11]
+// var array1 = [4,7,4,3,9,1,2,6,5,10,0]
 // console.log(mergeSort(array1)) // should be [1, 2, 3, 4, 4, 7, 9]
 
