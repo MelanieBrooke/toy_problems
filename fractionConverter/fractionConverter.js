@@ -29,15 +29,12 @@ var toFraction = function(number) {
   var stringNums = number.toString().split('.');
   // account for numbers with a '0' as either the fraction or the whole number, since it will not show up when the number is split
   if (stringNums.length === 1) {
-    if (number > 1) {
+    if (number >= 1) {
       result += stringNums[0] + '/1';
       return result;
     } else if (number < 1) {
       whole = '0';
       numerator = stringNums[0];
-    } else if (number === 1) {
-      result += '1/1';
-      return result;
     }
   } else {
       var whole = stringNums[0];
