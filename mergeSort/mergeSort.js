@@ -113,6 +113,7 @@ var mergeSort = function(array) {
     subset.push(array[i]);
     sortedArray.push(subset);
   }
+
   var firstIndex = 0;
 
   var mergeTwo = function(first, second) {
@@ -150,6 +151,6 @@ var mergeSort = function(array) {
   return sortedArray[0];
 };
 
-// var array1 = [4,7,4,3,9,1,2,6,5,10,0]
-// console.log(mergeSort(array1)) // should be [1, 2, 3, 4, 4, 7, 9]
+var array1 = [4,7,4,3,9,1,2,6,5,10,0]
+console.log(mergeSort(array1)) // should be [1, 2, 3, 4, 4, 7, 9]
 
