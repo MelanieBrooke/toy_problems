@@ -15,8 +15,15 @@
 var toFraction = function(number) {
   var result = '';
   if (number === 0) {
-    return '0';
+    return '0/1';
   }
+  var positive = true;
+  if (number < 0) {
+    positive = false;
+    number = Math.abs(number);
+    result += '-';
+  }
+
   var whole;
   var numerator;
   var stringNums = number.toString().split('.');
@@ -25,9 +32,13 @@ var toFraction = function(number) {
     if (number > 1) {
       result += stringNums[0] + '/1';
       return result;
-    } else if (number < 1)
+    } else if (number < 1) {
       whole = '0';
       numerator = stringNums[0];
+    } else if (number === 1) {
+      result += '1/1';
+      return result;
+    }
   } else {
       var whole = stringNums[0];
       var numerator = stringNums[1];
