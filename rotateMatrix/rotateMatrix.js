@@ -44,10 +44,11 @@
  */
 
 var rotateMatrix = function(matrix, direction) {
+  console.log(direction)
   rotated = [];
   var size = matrix[matrix.length - 1].length;
 
-  if (direction === 1 || null) {
+  if (direction === 1 || direction === undefined) {
     for (var i = 0; i < size; i++) {
       var newRow = [matrix[matrix.length-1][i]];
       rotated.push(newRow);
@@ -64,21 +65,23 @@ var rotateMatrix = function(matrix, direction) {
   //     rotated.push(newRow);
   //   }
   //   for (var l = size; l >= 0; l--) {
-  //     for (var j = 1, k = j - 1; j < matrix.length; j++) {
-  //       console.log(matrix[j])
-  //       // rotate[k].push()
-  //       // console.log(rotated);
+  //     for (var j = 0; j < matrix.length; j++) {
+  //       // if (matrix[j+1]) {
+  //         rotated[j].push(matrix[j+1][l]);
+  //         console.log(rotated);
+  //       // }
   //     }
   //   }
   }
+  return rotated;
 };
 
 var matrix = [
   [1,2,3,4],
   [5,6,7,8],
   [9,'A','B','C'],
-  ['D','E','F','G'],
-  ['H', 'I', 'J', 'K']
+  ['D','E','F','G']
+  // ,['H', 'I', 'J', 'K']
 ];
 // [
 //   [4, 8, 'C', 'G'],
@@ -87,7 +90,7 @@ var matrix = [
 //   [1, 5, 9, 'D']
 // ]
 
-rotateMatrix(matrix, 1);
+console.log(rotateMatrix(matrix));
 
 
 // input: a matrix, created by an array of arrays
