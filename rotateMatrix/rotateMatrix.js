@@ -43,7 +43,58 @@
  *  - Make your function accept a parameter for the direction of rotation (1 = clockwise, -1 = counterclockwise)
  */
 
-var rotateMatrix = function(matrix
-) {
-  // Your code here.
+var rotateMatrix = function(matrix, direction) {
+  rotated = [];
+  var size = matrix[matrix.length - 1].length;
+
+  if (direction === 1 || null) {
+    for (var i = 0; i < size; i++) {
+      var newRow = [matrix[matrix.length-1][i]];
+      rotated.push(newRow);
+    }
+    for (var j = matrix.length - 2; j >=0; j --) {
+      for (var k = 0; k < size; k++) {
+        rotated[k].push(matrix[j][k]);
+        console.log(rotated);
+      }
+    }
+  // } else if (direction === -1) {
+  //   for (var i = matrix[0].length - 1; i >= 0; i--) {
+  //     var newRow = [matrix[0][i]];
+  //     rotated.push(newRow);
+  //   }
+  //   for (var l = size; l >= 0; l--) {
+  //     for (var j = 1, k = j - 1; j < matrix.length; j++) {
+  //       console.log(matrix[j])
+  //       // rotate[k].push()
+  //       // console.log(rotated);
+  //     }
+  //   }
+  }
 };
+
+var matrix = [
+  [1,2,3,4],
+  [5,6,7,8],
+  [9,'A','B','C'],
+  ['D','E','F','G'],
+  ['H', 'I', 'J', 'K']
+];
+// [
+//   [4, 8, 'C', 'G'],
+//   [3, 7, 'B,' 'F'],
+//   [2, 6, 'A', 'E'],
+//   [1, 5, 9, 'D']
+// ]
+
+rotateMatrix(matrix, 1);
+
+
+// input: a matrix, created by an array of arrays
+// output: a similar matrix/array of arrays, rotated (as if you took the matrix and tipped it sideways)
+// constraints: none
+// edge cases: non-square matrices? Unsure if that counts as an edge case. Otherwise empty matrices or input that does not fit the array of arrays pattern.
+// discussion/thoughts: I am actually being thrown by using coordinates "backwards" as I love math and have taught several math classes that involved stressing "left/right before up/down" to my students, but it makes perfect sense given how you'd locate an item in the matrix.
+
+// for first or last array, use that to create the new set of arrays, then go through the others and add them to the new arrays
+
