@@ -31,8 +31,20 @@
  *   See https://www.dartmouth.edu/~chance/teaching_aids/books_articles/Mann.pdf .
  */
 
+
+/////  Does not use 0(1) space yet, first just getting a working shuffler that doesn't mutilate input, then will work on extra credit
 var shuffleDeck = function(deck) {
-  // Your code here
+  var shuffled = [];
+  var deckArray = Array.from(deck);
+  var randomCard = function() {
+    return Math.floor(Math.random() * deckArray.length);
+  }
+  for (var i = 0; i < deck.length; i++) {
+    var index = randomCard();
+    shuffled.push(deckArray[index]);
+    deckArray.splice(index, 1);
+  }
+  return shuffled;
 };
 
 // Ordered deck generator provided for your testing convenience
@@ -50,3 +62,6 @@ var orderedDeck = function() {
 
   return deck;
 };
+
+// var deck = orderedDeck();
+// console.log(shuffleDeck(deck));
