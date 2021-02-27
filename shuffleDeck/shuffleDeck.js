@@ -32,20 +32,36 @@
  */
 
 
-/////  Does not use 0(1) space yet, first just getting a working shuffler that doesn't mutilate input, then will work on extra credit
+// The algorithm I have written first should remain unbiased no matter the size, because each time it runs, it runs based on the total size of the input deck and picks at random from the entire deck.
+
+// second attempt to switch cards in place (though still using a new array to not mutate the input):
+
 var shuffleDeck = function(deck) {
-  var shuffled = [];
-  var deckArray = Array.from(deck);
-  var randomCard = function() {
-    return Math.floor(Math.random() * deckArray.length);
-  }
+  var shuffled = Array.from(deck);
   for (var i = 0; i < deck.length; i++) {
-    var index = randomCard();
-    shuffled.push(deckArray[index]);
-    deckArray.splice(index, 1);
+    var index = Math.floor(Math.random() * shuffled.length);
+    [shuffled[i], shuffled[index]] = [shuffled[index], shuffled[i]];
   }
   return shuffled;
 };
+
+
+
+// First attempt (passes all but extra credit test):
+
+// var shuffleDeck = function(deck) {
+//   var shuffled = [];
+//   var deckArray = Array.from(deck);
+//   var randomCard = function() {
+//     return Math.floor(Math.random() * deckArray.length);
+//   }
+//   for (var i = 0; i < deck.length; i++) {
+//     var index = randomCard();
+//     shuffled.push(deckArray[index]);
+//     deckArray.splice(index, 1);
+//   }
+//   return shuffled;
+// };
 
 // Ordered deck generator provided for your testing convenience
 // (You may alter this function, but an unaltered copy will be used for tests.)
