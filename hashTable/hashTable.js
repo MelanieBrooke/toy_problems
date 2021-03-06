@@ -27,18 +27,16 @@ var makeHashTable = function() {
       var bucket = [];
       bucket.push(newEntry);
       storage[newIndex] = bucket;
-      // return string + ' and ' + value + ' added to hash table in new bucket';
       return;
     }
     else {
       for (var i = 0; i < storage[newIndex].length; i++) {
         if (storage[newIndex][i][0] === string) {
-          // return 'Value already exists in hash table';
+          storage[newIndex][i] = [string, value];
           return;
         }
       }
       storage[newIndex].push([string, value]);
-      // return string + ' and ' + value + ' added to hash table in existing bucket';
       return;
     }
   };
@@ -46,34 +44,28 @@ var makeHashTable = function() {
   result.retrieve = function(string) {
     var stringIndex = getIndexBelowMaxForKey(string, storageLimit);
     if (!storage[stringIndex]) {
-      return 'error'
-      // return string + ' does not exist in hash table';
+      return undefined;
     } else {
       for (var i = 0; i < storage[stringIndex].length; i++) {
         if (string === storage[stringIndex][i][0]) {
           return storage[stringIndex][i][1];
         }
       }
-      // return string + ' does not exist in hash table';
-      return;
+      return undefined;
     }
   };
 
   result.remove = function(string) {
     var stringIndex = getIndexBelowMaxForKey(string, storageLimit);
     if (!storage[stringIndex]) {
-      // return string + ' does not exist in hash table';
       return;
     } else {
       for (var i = 0; i < storage[stringIndex].length; i++) {
         if (string === storage[stringIndex][i][0]) {
-          console.log('before: ', storage);
           storage[stringIndex].splice(i, 1);
-          console.log('after: ', storage);
           return;
         }
       }
-      // return string + ' does not exist in hash table';
       return;
     }
   };
