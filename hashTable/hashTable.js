@@ -20,20 +20,61 @@ var makeHashTable = function() {
   var result = {};
   var storage = [];
   var storageLimit = 1000;
-  result.insert = function(/*...*/ 
-) {
-    // TODO: implement `insert()`
+  result.insert = function(string, value) {
+    var newEntry = [string, value];
+    // console.log(storageLimit);
+    var newIndex = getIndexBelowMaxForKey(string, storageLimit);
+    // console.log(newIndex);
+    if (!storage[newIndex]) {
+      var bucket = [];
+      bucket.push(newEntry);
+      storage[newIndex] = bucket;
+      return string + ' and ' + value + ' added to hash table in new bucket';
+    }
+    else {
+      for (var i = 0; i < storage[newIndex].length; i++) {
+        if (storage[newIndex][i][0] === string) {
+          return 'Value already exists in hash table';
+        }
+      }
+      storage[newIndex].push([string, value]);
+      return string + ' and ' + value + ' added to hash table in existing bucket';
+    }
+    console.log('did not hit an if statement, storage is:', storage)
   };
 
-  result.retrieve = function(/*...*/ 
+  result.retrieve = function(/*...*/
 ) {
     // TODO: implement `retrieve()`
   };
 
-  result.remove = function(/*...*/ 
+  result.remove = function(/*...*/
 ) {
     // TODO: implement `remove()`
   };
 
   return result;
 };
+
+var nicknames = makeHashTable();
+console.log(nicknames.insert('Melanie DeWitt', 'Mel, Mel-Mel, Mels, Lemonie, Felony Melanie'));
+console.log(nicknames.insert('Melanie DeWitt', 'Mels'));
+
+
+
+
+// Insert:
+// need to create 'buckets' to handle collisions
+// Run hashing function to get index, see if a bucket exists at that location
+// If not, create the bucket and add the new string/value to the bucket
+// If so, see if that entry exists
+// If not, add it
+
+// Retrieve:
+// Run the string through the hashing function to get the index
+// if nothing exists at that index, error
+// Otherwise, check the bucket for that particular entry
+// if it exists, return the resulting value. If not, error
+
+// Remove:
+// Same as the retrieve, but if it exists, delete it
