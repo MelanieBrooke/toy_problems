@@ -40,7 +40,6 @@ var makeHashTable = function() {
       storage[newIndex].push([string, value]);
       return string + ' and ' + value + ' added to hash table in existing bucket';
     }
-    console.log('did not hit an if statement, storage is:', storage)
   };
 
   result.retrieve = function(string) {
@@ -55,12 +54,24 @@ var makeHashTable = function() {
       }
       return string + ' does not exist in hash table';
     }
-    // TODO: implement `retrieve()`
   };
 
-  result.remove = function(/*...*/
-) {
-    // TODO: implement `remove()`
+  result.remove = function(string) {
+    var stringIndex = getIndexBelowMaxForKey(string, storageLimit);
+    if (!storage[stringIndex]) {
+      return string + ' does not exist in hash table';
+    } else {
+      for (var i = 0; i < storage[stringIndex].length; i++) {
+        if (string === storage[stringIndex][i][0]) {
+          console.log('before: ', storage);
+          storage[stringIndex].splice(i, 1);
+          console.log('after: ', storage);
+          return;
+          // return storage[stringIndex][i][1];
+        }
+      }
+      return string + ' does not exist in hash table';
+    }
   };
 
   return result;
@@ -68,10 +79,12 @@ var makeHashTable = function() {
 
 var nicknames = makeHashTable();
 console.log(nicknames.insert('Melanie DeWitt', 'Mel, Mel-Mel, Mels, Lemonie, Felony Melanie'));
-console.log(nicknames.insert('Melanie DeWitt', 'Mels'));
-console.log(nicknames.retrieve('Melanie DeWitt'));
-console.log(nicknames.retrieve('Victoria DeWitt'));
-
+// console.log(nicknames.insert('Melanie DeWitt', 'Mels'));
+// console.log(nicknames.retrieve('Melanie DeWitt'));
+// console.log(nicknames.retrieve('Victoria DeWitt'));
+console.log(nicknames.insert('Ky Goeken', 'Kyuphus, Jelly Donut, Sassy Lady, Sassypants Jellyboy, Love Bunny, Kentucky'));
+console.log(nicknames.insert('Lucas DeWitt', 'Luke, Lukie Pookie'));
+nicknames.remove('Ky Goeken');
 
 
 
