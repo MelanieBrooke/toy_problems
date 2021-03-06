@@ -22,44 +22,48 @@ var makeHashTable = function() {
   var storageLimit = 1000;
   result.insert = function(string, value) {
     var newEntry = [string, value];
-    // console.log(storageLimit);
     var newIndex = getIndexBelowMaxForKey(string, storageLimit);
-    // console.log(newIndex);
     if (!storage[newIndex]) {
       var bucket = [];
       bucket.push(newEntry);
       storage[newIndex] = bucket;
-      return string + ' and ' + value + ' added to hash table in new bucket';
+      // return string + ' and ' + value + ' added to hash table in new bucket';
+      return;
     }
     else {
       for (var i = 0; i < storage[newIndex].length; i++) {
         if (storage[newIndex][i][0] === string) {
-          return 'Value already exists in hash table';
+          // return 'Value already exists in hash table';
+          return;
         }
       }
       storage[newIndex].push([string, value]);
-      return string + ' and ' + value + ' added to hash table in existing bucket';
+      // return string + ' and ' + value + ' added to hash table in existing bucket';
+      return;
     }
   };
 
   result.retrieve = function(string) {
     var stringIndex = getIndexBelowMaxForKey(string, storageLimit);
     if (!storage[stringIndex]) {
-      return string + ' does not exist in hash table';
+      return 'error'
+      // return string + ' does not exist in hash table';
     } else {
       for (var i = 0; i < storage[stringIndex].length; i++) {
         if (string === storage[stringIndex][i][0]) {
           return storage[stringIndex][i][1];
         }
       }
-      return string + ' does not exist in hash table';
+      // return string + ' does not exist in hash table';
+      return;
     }
   };
 
   result.remove = function(string) {
     var stringIndex = getIndexBelowMaxForKey(string, storageLimit);
     if (!storage[stringIndex]) {
-      return string + ' does not exist in hash table';
+      // return string + ' does not exist in hash table';
+      return;
     } else {
       for (var i = 0; i < storage[stringIndex].length; i++) {
         if (string === storage[stringIndex][i][0]) {
@@ -67,24 +71,23 @@ var makeHashTable = function() {
           storage[stringIndex].splice(i, 1);
           console.log('after: ', storage);
           return;
-          // return storage[stringIndex][i][1];
         }
       }
-      return string + ' does not exist in hash table';
+      // return string + ' does not exist in hash table';
+      return;
     }
   };
-
   return result;
 };
 
-var nicknames = makeHashTable();
-console.log(nicknames.insert('Melanie DeWitt', 'Mel, Mel-Mel, Mels, Lemonie, Felony Melanie'));
+// var nicknames = makeHashTable();
+// console.log(nicknames.insert('Melanie DeWitt', 'Mel, Mel-Mel, Mels, Lemonie, Felony Melanie'));
 // console.log(nicknames.insert('Melanie DeWitt', 'Mels'));
 // console.log(nicknames.retrieve('Melanie DeWitt'));
 // console.log(nicknames.retrieve('Victoria DeWitt'));
-console.log(nicknames.insert('Ky Goeken', 'Kyuphus, Jelly Donut, Sassy Lady, Sassypants Jellyboy, Love Bunny, Kentucky'));
-console.log(nicknames.insert('Lucas DeWitt', 'Luke, Lukie Pookie'));
-nicknames.remove('Ky Goeken');
+// console.log(nicknames.insert('Ky Goeken', 'Kyuphus, Jelly Donut, Sassy Lady, Sassypants Jellyboy, Love Bunny, Kentucky'));
+// console.log(nicknames.insert('Lucas DeWitt', 'Luke, Lukie Pookie'));
+// nicknames.remove('Ky Goeken');
 
 
 
