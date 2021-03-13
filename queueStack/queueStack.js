@@ -27,9 +27,7 @@ var Stack = function() {
       for (var i = 0; i < this.newIndex - 1; i++) {
         temp[i] = this.storage[i];
       }
-      // console.log('temp: ', temp, '; this.storage: ', this.storage);
       this.storage = temp;
-      // console.log('new storage: ', this.storage);
       this.newIndex -= 1;
       return poppedElement;
     }
@@ -60,11 +58,10 @@ var Queue = function() {
     var size = inbox.size();
     for (var j = 0; j < size; j++) {
       outbox.push(inbox.pop())
-      if (j === size - 1) {
-        popped = outbox.storage[outbox.size() - 1];
-      }
     }
-    for (var k = 0; k < size - 1; k++) {
+    popped = outbox.pop();
+    size = outbox.size();
+    for (var k = 0; k < size; k++) {
       inbox.push(outbox.pop());
     }
     return popped;
@@ -87,12 +84,12 @@ var Queue = function() {
 // console.log(testStack.pop());
 // console.log(testStack.pop());
 
-var testQueue = new Queue();
-testQueue.enqueue(1);
-testQueue.enqueue(2);
-testQueue.enqueue(3);
-console.log(testQueue.dequeue());
-console.log(testQueue.dequeue());
-testQueue.enqueue(4);
-console.log(testQueue.dequeue());
-console.log(testQueue.dequeue());
+// var testQueue = new Queue();
+// testQueue.enqueue(1);
+// testQueue.enqueue(2);
+// testQueue.enqueue(3);
+// console.log(testQueue.dequeue());
+// console.log(testQueue.dequeue());
+// testQueue.enqueue(4);
+// console.log(testQueue.dequeue());
+// console.log(testQueue.dequeue());
