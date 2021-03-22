@@ -114,7 +114,7 @@ BinaryHeap.prototype.removeRoot = function () {
       [heap[index], heap[childIndex2]] = [heap[childIndex2], heap[index]];
       checkNSwap(newRoot, childIndex2, heap);
     }
-  }
+  };
 
   while (this._heap[0] > this._heap[1] || this._heap[0] > this._heap[2]) {
     checkNSwap(this._heap[0], 0, this._heap);
@@ -123,30 +123,40 @@ BinaryHeap.prototype.removeRoot = function () {
   return root;
 }
 
+var heapSort = function(array) {
+  var heap = new BinaryHeap();
+  for (var i = 0; i < array.length; i++) {
+    heap.insert(array[i]);
+  }
+  var sortedHeap = [];
+  for (var j = 0; j < array.length; j++) {
+    sortedHeap.push(heap.removeRoot());
+  }
+  return sortedHeap;
+};
+
 // input: insert: an integer; removeRoot: none
 // output: insert: none directly, but the integer needs to be placed into the heap at the next open spot. If it's smaller than its parent, the new node and the parent node will need to swap places. This new parent node would already be smaller than the other child node then, if there is one, since logic says that newnode < parent < otherchild. However, it must now be compared to its new parent, and if it is smaller than its new parent, you must swap again; removeRoot: I think you'd return the removed root? And then a new root is found by swapping the old root with the end of the array, and removing the old from the end, and then the new must be compared with its children and swapped if it's bigger than its children, down the line until everything is ordered again.
 // constraints: insert: can only add to end and make swaps; remove: can only swap beginning and end and then remove end
 // edge cases: adding an integer already in the heap
 
-var newHeap = new BinaryHeap;
+// var newHeap = new BinaryHeap;
+// newHeap.insert(1);
+// newHeap.insert(2);
+// newHeap.insert(3);
+// newHeap.insert(4);
+// newHeap.insert(5);
+// newHeap.insert(6);
+// newHeap.insert(7);
+// newHeap.insert(8);
+// newHeap.insert(9);
+// newHeap.insert(5);
+// newHeap.insert(2);
 // console.log(newHeap._heap);
-// console.log(newHeap.getRoot())
-newHeap.insert(1);
-// console.log(newHeap._heap);
-// console.log(newHeap.getRoot())
-newHeap.insert(2);
-newHeap.insert(3);
-newHeap.insert(4);
-newHeap.insert(5);
-newHeap.insert(6);
-newHeap.insert(7);
-newHeap.insert(8);
-newHeap.insert(9);
-newHeap.insert(5);
-newHeap.insert(2);
-console.log(newHeap._heap);
-newHeap.removeRoot();
-newHeap.removeRoot();
-newHeap.removeRoot();
+// newHeap.removeRoot();
+// newHeap.removeRoot();
+// newHeap.removeRoot();
 
-console.log(newHeap._heap);
+// console.log(newHeap._heap);
+
+// console.log(heapSort([4,2,7,3,1,5,0]));
