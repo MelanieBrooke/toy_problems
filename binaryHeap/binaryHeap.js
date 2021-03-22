@@ -97,7 +97,30 @@ BinaryHeap.prototype.insert = function (value) {
 }
 
 BinaryHeap.prototype.removeRoot = function () {
-  // TODO: Your code here
+  [this._heap[0], this._heap[this._heap.length-1]] = [this._heap[this._heap.length-1], this._heap[0]];
+  var root = this._heap.pop();
+
+  var checkNSwap = function(newRoot, index, heap) {
+    childIndex1 = index * 2 + 1;
+    child1 = heap[childIndex1];
+    childIndex2 = index * 2 + 2;
+    child2 = heap[childIndex2];
+    if (newRoot <= child1 && newRoot <= child2) {
+      return;
+    } else if (child1 < child2) {
+      [heap[index], heap[childIndex1]] = [heap[childIndex1], heap[index]];
+      checkNSwap(newRoot, childIndex1, heap);
+    } else if (child1 > child2) {
+      [heap[index], heap[childIndex2]] = [heap[childIndex2], heap[index]];
+      checkNSwap(newRoot, childIndex2, heap);
+    }
+  }
+
+  while (this._heap[0] > this._heap[1] || this._heap[0] > this._heap[2]) {
+    checkNSwap(this._heap[0], 0, this._heap);
+  }
+
+  return root;
 }
 
 // input: insert: an integer; removeRoot: none
@@ -121,5 +144,9 @@ newHeap.insert(8);
 newHeap.insert(9);
 newHeap.insert(5);
 newHeap.insert(2);
+console.log(newHeap._heap);
+newHeap.removeRoot();
+newHeap.removeRoot();
+newHeap.removeRoot();
 
 console.log(newHeap._heap);
