@@ -10,7 +10,7 @@
  * parent of the 3rd and 4th nodes, and the 2nd node will be the parent of the 5th and
  * 6th nodes. In a specific kind of binary heap, the binary min heap, every node is
  * less than its immediate children:
- * 
+ *
  *          0
  *     1         2
  *   3   4     5   6
@@ -79,9 +79,47 @@ BinaryHeap.prototype.getRoot = function () {
 }
 
 BinaryHeap.prototype.insert = function (value) {
-  // TODO: Your code here
+  this._heap.push(value);
+
+  var checkNSwap = function(child, heap, childIndex) {
+    var parentIndex = Math.floor( (childIndex - 1) / 2 );
+    var parent = heap[parentIndex];
+    if (child < parent) {
+      [heap[parentIndex], heap[childIndex]] = [heap[childIndex], heap[parentIndex]];
+      checkNSwap(child, heap, parentIndex);
+    } else {
+      return;
+    }
+  }
+
+  checkNSwap(value, this._heap, this._heap.length-1)
+  return;
 }
 
 BinaryHeap.prototype.removeRoot = function () {
   // TODO: Your code here
 }
+
+// input: insert: an integer; removeRoot: none
+// output: insert: none directly, but the integer needs to be placed into the heap at the next open spot. If it's smaller than its parent, the new node and the parent node will need to swap places. This new parent node would already be smaller than the other child node then, if there is one, since logic says that newnode < parent < otherchild. However, it must now be compared to its new parent, and if it is smaller than its new parent, you must swap again; removeRoot: I think you'd return the removed root? And then a new root is found by swapping the old root with the end of the array, and removing the old from the end, and then the new must be compared with its children and swapped if it's bigger than its children, down the line until everything is ordered again.
+// constraints: insert: can only add to end and make swaps; remove: can only swap beginning and end and then remove end
+// edge cases: adding an integer already in the heap
+
+var newHeap = new BinaryHeap;
+// console.log(newHeap._heap);
+// console.log(newHeap.getRoot())
+newHeap.insert(1);
+// console.log(newHeap._heap);
+// console.log(newHeap.getRoot())
+newHeap.insert(2);
+newHeap.insert(3);
+newHeap.insert(4);
+newHeap.insert(5);
+newHeap.insert(6);
+newHeap.insert(7);
+newHeap.insert(8);
+newHeap.insert(9);
+newHeap.insert(5);
+newHeap.insert(2);
+
+console.log(newHeap._heap);
