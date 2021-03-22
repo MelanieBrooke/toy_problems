@@ -13,6 +13,7 @@
 
 var makeBoard = function(n) {
   var board = [];
+  board.paths = [];
   for (var i = 0; i < n; i++) {
     board.push([]);
     for (var j = 0; j < n; j++) {
@@ -25,13 +26,7 @@ var makeBoard = function(n) {
   board.hasBeenVisited = function(i, j) {
     return !!this[i][j];
   };
-  return board;
-};
-
-var robotPaths = function(n, board, i, j) {
-  var allPaths = [];
-  var robotBoard = new makeBoard(n);
-  var moveRobot = function(i, j, robotBoard) {
+  board.getMoves = function(i, j, robotBoard) {
     var movements = [];
       var up = [i - 1, j];
       if (robotBoard[up[0]] !== undefined && robotBoard[up[0]][up[1]] !== undefined && robotBoard[up[0]][up[1]] === false) {
@@ -54,26 +49,67 @@ var robotPaths = function(n, board, i, j) {
     } else {
       return movements;
     }
+  };
+  return board;
+};
+
+
+
+var robotPaths = function(n, board = null, i = 0, j = 0) {
+  if (board === null) {
+    board = makeBoard(n);
   }
+  var paths = 0
 
-    var testPath = function(robotBoard, i, j) {
-      var path = [];
-      var end = [robotBoard.length, robotBoard[0].length]
-      var movements = moveRobot(i, j, robotBoard);
-      if (movements === false) {
-        return false;
-      } else {
-        for (var k = 0; k < movements.length; k++) {
-          if (robotBoard.hasBeenVisited(movements[k][0], movements[k][1]) === false) {
-            robotBoard.togglePiece(movements[k][0], movements[k][1]);
-            path.push(movements[k]);
-          }
+  var botPosition = [i, j];
+  board.togglePiece(i, j);
 
-          }
+  var moveBot = function(position) {
+    var moves = board.getMoves(position[0], position[1], board);
+    var step = function() {
+      for (var k = 0; k < moves.length; k++) {
+        if (k === n) {
+          paths += 1;
+          return;
         }
+        board.togglePiece(moves[k][0], moves[k][1]);
+        moveBot([moves[k][0], moves[k][1]]);
       }
     }
+    step();
+    // assess moves
+    // for each move, check
+    // just taking a single step
+    // position changes
+    // step marked
+  }
 
+
+
+  // var testPath = function(i, j) {
+  //   var path = [];
+  //   var end = [robotBoard.length, robotBoard[0].length]
+  //   var movements = getMoves(i, j, robotBoard);
+  //   var move = function(l, m) {
+  //     robotBoard.togglePiece(l, m);
+  //     path.push([l, m]);
+  //     console.log('path',path);
+
+  //   }
+  //   console.log('movements', movements);
+  //   if (movements === false) {
+  //     return false;
+  //   } else {
+  //     for (var k = 0; k < movements.length; k++) {
+  //       console.log('movement #k', k);
+  //       console.log('movement coordinates', movements[k][0], movements[k][1]);
+  //       console.log('true or false?', robotBoard[0][0])
+  //       if (robotBoard.hasBeenVisited(movements[k][0], movements[k][1]) === false) {
+  //         move(movements[k][0], movements[k][1])
+  //       }
+  //     }
+  //   }
+  // }
 
     // if no valid movements (from here, only will happen if grid is 1x1 so take care of that in advance? Edge case?)
   // create helper function to test a path
@@ -84,10 +120,11 @@ var robotPaths = function(n, board, i, j) {
     // if visited, keep trying every space from movement array
     // if no available moves and robot has not gotten to the end of grid, back up a step and keep trying
   // when no more paths to test, return the size of the object
-  return allPaths.length;
+  moveBot(botPosition);
+  console.log('paths',paths);
 };
 
-console.log(robotPaths(3, makeBoard, 1, 1));
+console.log(robotPaths(3));
 
 
 //////////////////// Notes ////////////////////
