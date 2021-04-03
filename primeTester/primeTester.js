@@ -14,7 +14,7 @@ var primeTester = function(n) {
   } else if (n % 2 === 0) {
     return false;
   }
-  for (var i = 3; i < Math.sqrt(n); i += 2) {
+  for (var i = 3; i < Math.sqrt(n) + 1; i += 2) {
     if (n % i === 0) {
       return false;
     }
@@ -32,6 +32,21 @@ var primeSieve = function (start, end) {
   if (start < 0 || end < 0 || start > end) {
     return null;
   }
+  start = Math.floor(start);
+  var primes = [];
+  if (start <= 2) {
+    primes.push(2);
+    start = 3;
+  }
+  if (start % 2 === 0) {
+    start += 1;
+  }
+  for (var i = start; i < end + 1; i += 2) {
+    if (primeTester(i)) {
+      primes.push(i);
+    }
+  }
+  return primes;
 };
 
 
@@ -55,6 +70,8 @@ var primeSieve = function (start, end) {
 // notes: unsure if this should be an array or not but gonna go with array as that seems the most obvious choice
 
 // console.time('primeTester');
-// console.log(primeTester(64));
+// console.log(primeTester(25));
 // console.timeEnd('primeTester');
-// console.log(primeSieve(4, 19)); // should be [5, 7, 11, 13, 17, 19]
+// console.time('primeSieve');
+// console.log(primeSieve(1, 12345678));
+// console.timeEnd('primeSieve');
