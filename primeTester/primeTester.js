@@ -14,7 +14,7 @@ var primeTester = function(n) {
   } else if (n % 2 === 0) {
     return false;
   }
-  for (var i = 3; i < n/2; i += 2) {
+  for (var i = 3; i < Math.sqrt(n); i += 2) {
     if (n % i === 0) {
       return false;
     }
@@ -29,6 +29,9 @@ var primeTester = function(n) {
  */
 
 var primeSieve = function (start, end) {
+  if (start < 0 || end < 0 || start > end) {
+    return null;
+  }
 };
 
 
@@ -45,6 +48,13 @@ var primeSieve = function (start, end) {
 // if nothing hits, return true
 
 //// Extra credit ////
+// input: inclusive range (two integers)
+// output: a list of prime numbers within that range
+// edge cases: a range that is reversed, or starts below zero, or uses numbers that aren't whole numbers
+// constraints: none
+// notes: unsure if this should be an array or not but gonna go with array as that seems the most obvious choice
 
-
-// console.log(primeTester(39));
+// console.time('primeTester');
+// console.log(primeTester(64));
+// console.timeEnd('primeTester');
+// console.log(primeSieve(4, 19)); // should be [5, 7, 11, 13, 17, 19]
