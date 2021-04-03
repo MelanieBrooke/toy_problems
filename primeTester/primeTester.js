@@ -5,7 +5,7 @@
  */
 
 var primeTester = function(n) {
-  if (typeof n !== 'number' || n < 1 || n % 1 !== 0) {
+  if (typeof n !== 'number' || n < 1 || n % 1 !== 0 || n === 1) {
     // n isn't a number or n is less than 1 or n is not an integer
     return false;
   }
@@ -36,7 +36,6 @@ var primeSieve = function (start, end) {
   var primes = [];
   if (start <= 2) {
     primes.push(2);
-    start = 3;
   }
   if (start % 2 === 0) {
     start += 1;
@@ -48,6 +47,23 @@ var primeSieve = function (start, end) {
   }
   return primes;
 };
+
+// attempt to base if off the given sieves listed above (unfinished) //
+
+// var primeSieve = function (start, end) {
+//   var numbers = [];
+//   for (var i = start; i < end + 1; i ++) {
+//     if (i % 2 !== 0) {
+//       numbers.push(i)
+//     }
+//   }
+//   for (var i = 0; i < numbers.length; i ++) {
+//     if (!primeTester(numbers[i])) {
+
+//     }
+//   }
+//   return numbers;
+// }
 
 
 // input: an integer (positive & whole)
@@ -68,6 +84,10 @@ var primeSieve = function (start, end) {
 // edge cases: a range that is reversed, or starts below zero, or uses numbers that aren't whole numbers
 // constraints: none
 // notes: unsure if this should be an array or not but gonna go with array as that seems the most obvious choice
+
+//// Extra credit using the wiki articles ////
+// create array of numbers from range
+// test each number, remove all its multiples from the list, and remove that number if it is composite
 
 // console.time('primeTester');
 // console.log(primeTester(25));
