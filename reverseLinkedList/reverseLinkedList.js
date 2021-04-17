@@ -27,5 +27,33 @@ var Node = function(value) {
 };
 
 var reverseLinkedList = function(node) {
-  // Your code here.
+  var lastNode = null;
+  while (node !== null) {
+    var copy = node.next;
+    node.next = lastNode;
+    lastNode = node;
+    node = copy;
+  }
+  return lastNode;
 };
+
+// // create test list
+// var root = Node('A');
+// var nodeB = root.next = Node('B');
+// var nodeC = nodeB.next = Node('C');
+
+// // to see what I'm doing
+// var showList = function(node) {
+//   if (node.next === null) {
+//     console.log(node.value);
+//   } else {
+//     console.log(node.value);
+//     showList(node.next);
+//   }
+// }
+
+// // showList(root);
+// var reversedRoot = reverseLinkedList(root);
+// console.log('run function:', reversedRoot);
+// // showList(reversedRoot);
+// // console.log(root.next);
