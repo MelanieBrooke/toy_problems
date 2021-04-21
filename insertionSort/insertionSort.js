@@ -37,7 +37,7 @@
 // It will transform an array of numbers into an array of valid objects.
 var testingTransform = function(array) {
   var transform = [];
-  
+
   for (var i = 0; i < array.length; i++) {
     transform.push({value: array[i], i: i});
   }
@@ -45,8 +45,34 @@ var testingTransform = function(array) {
   return transform;
 };
 
-var insertionSort = function(array
-) {
-  // Your code goes here. Feel free to add helper functions if needed.
+var insertionSort = function(array) {
+  var sortAsYouGo = (currentItem, currentIndex, i) => {
+    if (currentIndex - 1 < 0 && currentItem.value < array[currentIndex].value) {
+      array.splice(0, 0, currentItem);
+      array.splice(i + 1, 1);
+      return;
+    } else if (currentItem.value < array[currentIndex].value) {
+      sortAsYouGo(currentItem, currentIndex - 1, i);
+    } else if (currentItem.value >= array[currentIndex].value) {
+      array.splice(currentIndex + 1, 0, currentItem);
+      array.splice(i + 1, 1);
+      return;
+    }
+  }
+  for (var i = 1; i < array.length; i++) {
+    if (array[i].value < array[i-1].value) {
+      sortAsYouGo(array[i], [i-1], i);
+    }
+  }
   return array;
 };
+
+// input: An array, in this case, an array of objects in order to test that it's a stable sort
+// output: The sorted array
+// constraints: sorting needs to be stable, and it appears the sorting happens one element at a time, adding the current element to its proper spot in the new growing sorted result array
+// edge cases: an array of items that cannot be sorted together, an array with a length of 1 or 0
+
+// var testArray = testingTransform([3, -5, 1, -3, 0, 7]);
+// console.log(testArray);
+// insertionSort(testArray);
+// console.log(testArray);
