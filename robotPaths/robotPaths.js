@@ -59,7 +59,7 @@ var robotPaths = function(n, board = null, i = 0, j = 0) {
   if (board === null) {
     board = makeBoard(n);
   }
-  var paths = 0
+  var paths = 0;
 
   var botPosition = [i, j];
   board.togglePiece(i, j);
@@ -68,9 +68,9 @@ var robotPaths = function(n, board = null, i = 0, j = 0) {
     var moves = board.getMoves(position[0], position[1], board);
     var step = function() {
       for (var k = 0; k < moves.length; k++) {
-        if (k === n) {
+        if (moves[k][0] === n && moves[k][1] === n) {
           paths += 1;
-          return;
+          // return;
         }
         board.togglePiece(moves[k][0], moves[k][1]);
         moveBot([moves[k][0], moves[k][1]]);
@@ -84,44 +84,8 @@ var robotPaths = function(n, board = null, i = 0, j = 0) {
     // step marked
   }
 
-
-
-  // var testPath = function(i, j) {
-  //   var path = [];
-  //   var end = [robotBoard.length, robotBoard[0].length]
-  //   var movements = getMoves(i, j, robotBoard);
-  //   var move = function(l, m) {
-  //     robotBoard.togglePiece(l, m);
-  //     path.push([l, m]);
-  //     console.log('path',path);
-
-  //   }
-  //   console.log('movements', movements);
-  //   if (movements === false) {
-  //     return false;
-  //   } else {
-  //     for (var k = 0; k < movements.length; k++) {
-  //       console.log('movement #k', k);
-  //       console.log('movement coordinates', movements[k][0], movements[k][1]);
-  //       console.log('true or false?', robotBoard[0][0])
-  //       if (robotBoard.hasBeenVisited(movements[k][0], movements[k][1]) === false) {
-  //         move(movements[k][0], movements[k][1])
-  //       }
-  //     }
-  //   }
-  // }
-
-    // if no valid movements (from here, only will happen if grid is 1x1 so take care of that in advance? Edge case?)
-  // create helper function to test a path
-    // create path coordinate array
-    // robot checks movement, tests if space has been visited
-    // if not visited, toggle to visited and add coordinates to coordinate array
-    // then test the path from there
-    // if visited, keep trying every space from movement array
-    // if no available moves and robot has not gotten to the end of grid, back up a step and keep trying
-  // when no more paths to test, return the size of the object
   moveBot(botPosition);
-  console.log('paths',paths);
+  return ('path count: ', paths)
 };
 
 console.log(robotPaths(3));

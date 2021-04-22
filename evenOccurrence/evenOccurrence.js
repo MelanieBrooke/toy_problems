@@ -32,7 +32,9 @@ var evenOccurrence = function(arr) {
 // constraints: none
 // edge cases: if no even amounts of any item, return null
 
+// console.time('evenOccurrence');
 // console.log(evenOccurrence([1, 7, 2, 4, 5, 6, 8, 9, 6, 4])) //should be 4
 // console.log(evenOccurrence([2, 4, 6, 8, 2, 4, 6, 8, 2])) // should be 4
 // console.log(evenOccurrence([2, 4, 6, 8, 2, 3, 2, 5])) // should be null
 // console.log(evenOccurrence(['a', 'b', 'c', 'a', 'b', 'c', 'a'])) // should be 'b'
+// console.timeEnd('evenOccurrence');

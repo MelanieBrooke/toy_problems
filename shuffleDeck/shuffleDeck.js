@@ -37,7 +37,8 @@
 // second attempt to switch cards in place (though still using a new array to not mutate the input):
 
 var shuffleDeck = function(deck) {
-  var shuffled = Array.from(deck);
+  // var shuffled = Array.from(deck);
+  var shuffled = deck.slice();
   for (var i = 0; i < deck.length; i++) {
     var index = Math.floor(Math.random() * shuffled.length);
     [shuffled[i], shuffled[index]] = [shuffled[index], shuffled[i]];
@@ -79,5 +80,5 @@ var orderedDeck = function() {
   return deck;
 };
 
-// var deck = orderedDeck();
-// console.log(shuffleDeck(deck));
+var deck = orderedDeck();
+console.log(shuffleDeck(deck));

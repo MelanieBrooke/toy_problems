@@ -174,9 +174,9 @@ generateArray = function(size, min, max) {
   return result;
 }
 
-// var bigArray = generateArray(500000, -100000, 100000);
+var bigArray = generateArray(125000, -100000, 100000);
 
 
-// console.time('mergeSort');
-// mergeSort(bigArray);
-// console.timeEnd('mergeSort');
+console.time('mergeSort');
+mergeSort(bigArray);
+console.timeEnd('mergeSort');
