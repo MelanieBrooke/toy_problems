@@ -108,9 +108,19 @@
 var mergeSort = function(array) {
   var sortedArray = [];
   for (var i = 0; i < array.length; i++) {
-    // do the presorted subsets if time
+    // presorted subsets
     var subset = [];
-    subset.push(array[i]);
+    var findSubset = () => {
+      if (array[i + 1] > array[i]) {
+        subset.push(array[i]);
+        i += 1;
+        findSubset();
+      } else {
+        subset.push(array[i]);
+        return;
+      }
+    }
+    findSubset();
     sortedArray.push(subset);
   }
 
@@ -151,6 +161,22 @@ var mergeSort = function(array) {
   return sortedArray[0];
 };
 
-var array1 = [4,7,4,3,9,1,2,6,5,10,0]
-console.log(mergeSort(array1)) // should be [1, 2, 3, 4, 4, 7, 9]
+// var array1 = [4,7,4,3,9,1,2,6,5,10,0]
+// console.log(mergeSort(array1)) // should be [1, 2, 3, 4, 4, 7, 9]
 
+
+generateArray = function(size, min, max) {
+  var result = [];
+  for (var i = 0; i < size; i++) {
+    var val = Math.floor(Math.random() * (max - min + 1) + min)
+    result.push(val)
+  }
+  return result;
+}
+
+// var bigArray = generateArray(500000, -100000, 100000);
+
+
+// console.time('mergeSort');
+// mergeSort(bigArray);
+// console.timeEnd('mergeSort');
