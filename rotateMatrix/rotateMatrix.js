@@ -39,59 +39,64 @@
  * rotatedMatrix[3][2]; // 8
  *
  * Extra credit:
- *  - Make your function operate on rectangular matrices (MxN rather than NxN).
+ *  - Make your function operate on rectangular matrices (widthN rather than NxN).
  *  - Make your function accept a parameter for the direction of rotation (1 = clockwise, -1 = counterclockwise)
  */
 
-var rotateMatrix = function(matrix, direction) {
+var rotateMatrix = function(matrix, direction = 1) {
   // console.log(direction)
   rotated = [];
-  if (matrix === []) {
+  if (matrix.length === 0) {
+    console.log(rotated)
     return rotated;
   }
 
-  var size = matrix[matrix.length - 1].length;
+  var width = matrix[0].length;
+  var height = matrix.length;
 
-  if (direction === 1 || direction === undefined) {
-    for (var i = 0; i < size; i++) {
-      var newRow = [matrix[matrix.length-1][i]];
+  if (direction === 1) {
+    for (var i = 0; i < width; i++) {
+      var newRow = [matrix[height-1][i]];
       rotated.push(newRow);
     }
-    for (var j = matrix.length - 2; j >=0; j --) {
-      for (var k = 0; k < size; k++) {
+    for (var j = height - 2; j >=0; j --) {
+      for (var k = 0; k < width; k++) {
         rotated[k].push(matrix[j][k]);
-        // console.log(rotated);
       }
     }
   } else if (direction === -1) {
-    for (var i = matrix[0].length - 1; i >= 0; i--) {
-      var newRow = [matrix[0][i]];
-      rotated.push(newRow);
+    console.log('direction: ', direction)
+    for (var i = 0; i < width; i++) {
+      rotated.push([]);
     }
-    for (var l = size - 1; l >= 0; l--) {
-      for (var j = 0; j < matrix.length; j++) {
-        console.log('matrix [j][l]', matrix[j][l]);
+    var l = width - 1;
+    for (var j = 0; j < rotated.length; j++) {
+      for (var k = 0; k < height; k++) {
+        rotated[j].push(matrix[k][l]);
       }
+      l -= 1;
     }
   }
   return rotated;
 };
 
-var matrix = [
-  [1,2,3,4],
-  [5,6,7,8],
-  [9,'A','B','C'],
-  ['D','E','F','G']
-  // ,['H', 'I', 'J', 'K']
-];
+// var matrix = [
+//   [1,2,3,4],
+//   [5,6,7,8],
+//   [9,'A','B','C'],
+//   ['D','E','F','G']
+//   ,['H', 'I', 'J', 'K']
+// ];
 // [
-//   [4, 8, 'C', 'G'],
-//   [3, 7, 'B,' 'F'],
-//   [2, 6, 'A', 'E'],
-//   [1, 5, 9, 'D']
+//   [4, 8, 'C', 'G', 'K'],
+//   [3, 7, 'B,' 'F', 'J'],
+//   [2, 6, 'A', 'E', 'I'],
+//   [1, 5, 9, 'D', 'H']
 // ]
 
-console.log(rotateMatrix(matrix, -1));
+// console.log(rotateMatrix(matrix));
+// console.log('rotated:', rotateMatrix(matrix, -1));
+// rotateMatrix([]);
 
 
 // input: a matrix, created by an array of arrays
