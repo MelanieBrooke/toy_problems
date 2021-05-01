@@ -18,11 +18,26 @@ var sumArray = function(array) {
     return array[0];
   }
 
+  // covering arrays of all negatives without obsessively checking them individually later
+  // also covers if the last item is the largest number on its own and doesn't need to be accounted for later
   var result = array[0];
+  for (j = 0; j < array.length; j++) {
+    if (array[j] > result) {
+      result = array[j];
+    }
+  }
+
   var temp = array[0];
-  var newStart = 1;
-  var newIndex = array[0];
+  var newStart = 1; // pausing at every negative number, not starting over
+  var newIndex = 0; // to start over searching from the next negative number in the array
   var firstNeg = 0;
+  var end = true;
+
+  if (array[0] < 0 && array[1] >= 0 || array[0] < 0 && array[0] < array[1]) {
+    result = array[1];
+    temp = array[1];
+    newStart += 1;
+  }
 
   var checking = () => {
     for (var i = newStart; i < array.length; i++) {
@@ -33,6 +48,7 @@ var sumArray = function(array) {
         firstNeg += 1;
         if (firstNeg === 1) {
           newIndex = i;
+          end = false;
         }
         break;
       }
@@ -44,12 +60,18 @@ var sumArray = function(array) {
       temp += array[i];
       newStart += 1;
       checking();
-    // } else if (firstNeg !== 0 && newStart < array.length - 1) {
-    //   newStart = newIndex;
-    //   firstNeg = 0;
-    //   temp = array[newStart];
-    //   console.log('newStart', newStart, 'temp', temp)
-    //   checking();
+    } else {
+      if (end === false && newIndex < array.length - 1) {
+        firstNeg = 0;
+        newStart = newIndex;
+        temp = array[newStart];
+        end = true;
+        console.log('newIndex', newIndex, 'newStart', newStart)
+        // checking();
+
+      }
+      // if ()
+
     }
   }
 
@@ -74,8 +96,13 @@ var sumArray = function(array) {
 // reset firstNeg and temp
 // make sure this isn't the last possible iteration?
 
-// console.log(sumArray([1, 2, 3])); // => 6
-// console.log(sumArray([1, 2, 3, -4])); // 6
-// console.log(sumArray([1, 2, 3, -4, 5])); // 7
-// console.log(sumArray([4, -1, 5])); // => 8
-// console.log(sumArray([10, -11, 11])); // 11
+// console.log(sumArray([1, 2, 3])); // => 6 ***
+// console.log(sumArray([1, 2, 3, -4])); // 6 ***
+// console.log(sumArray([1, 2, 3, -4, 5])); // 7 ***
+// console.log(sumArray([4, -1, 5])); // => 8 ***
+// console.log(sumArray([10, -11, 11])); // 11 ***
+// console.log(sumArray([-7,-6,-9])); // -6 ***
+// console.log(sumArray([-5,2,3])); // 5 ***
+console.log(sumArray([-5,-5,-5,2,3])); // 5
+// console.log(sumArray([-3,-2,-1,-2,-3])); // -1 ***
+console.log(sumArray([4, 2, -7, 6, -2, 5, -3, 2, -1])); // 9
