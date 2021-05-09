@@ -58,7 +58,7 @@ Number.prototype.toEnglish = function () {
   if (numbersToWords[integer]) {
     return numbersToWords[integer];
   } else if (numbersToPlace[integer]) {
-      return 'one' + numbersToPlace[integer];
+      return 'one ' + numbersToPlace[integer];
   }
   var words = '';
   var string = this.toString();
@@ -158,3 +158,4 @@ Number.prototype.toEnglish = function () {
 // console.log((0).toEnglish());
 // console.log((38420000235).toEnglish());
 // console.log((500).toEnglish());
+console.log((1000).toEnglish());
