@@ -58,7 +58,7 @@ Number.prototype.toEnglish = function () {
   if (numbersToWords[integer]) {
     return numbersToWords[integer];
   } else if (numbersToPlace[integer]) {
-      return numbersToPlace[integer];
+      return 'one' + numbersToPlace[integer];
   }
   var words = '';
   var string = this.toString();
@@ -97,7 +97,7 @@ Number.prototype.toEnglish = function () {
       englishNum += numbersToWords[digitTen * 10];
     }
     if (digitTen > 0 && digitOne > 0) {
-      englishNum += '-'
+      englishNum += '-';
     }
     if (digitOne > 0) {
       englishNum += numbersToWords[digitOne];
@@ -157,3 +157,4 @@ Number.prototype.toEnglish = function () {
 // console.log((284842750392057375073).toEnglish())
 // console.log((0).toEnglish());
 // console.log((38420000235).toEnglish());
+// console.log((500).toEnglish());
