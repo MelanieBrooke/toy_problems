@@ -90,7 +90,7 @@ Number.prototype.toEnglish = function () {
     }
     if (digitTen === 1) {
       var digitTeen = digitTen * 10 + digitOne;
-      englishNum += numbersToWords[digitTeen];
+      englishNum += numbersToWords[digitTeen] + ' ';
       return englishNum;
     }
     if (digitTen > 0) {
@@ -152,10 +152,11 @@ Number.prototype.toEnglish = function () {
 
 // console.log((7).toEnglish()); // > "seven"
 // console.log((575).toEnglish()); // > "five hundred seventy-five"
-// console.log((78193512).toEnglish()); // > "seventy-eight million one hundred ninety-three thousand five hundred twelve"
+console.log((78193512).toEnglish()); // > "seventy-eight million one hundred ninety-three thousand five hundred twelve"
 // console.log((3052750903).toEnglish());
 // console.log((284842750392057375073).toEnglish())
 // console.log((0).toEnglish());
 // console.log((38420000235).toEnglish());
 // console.log((500).toEnglish());
-console.log((1000).toEnglish());
+// console.log((1000).toEnglish());
+console.log((12234857).toEnglish());
