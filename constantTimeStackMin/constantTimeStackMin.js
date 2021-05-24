@@ -35,7 +35,7 @@
       var popped = stack[stack.length - 1];
       stack.splice(stack[stack.length - 1], 1);
       if (popped === stackerTracker[stackerTracker.length - 1]) {
-        stackerTracker.splice(stackerTracker[stackerTracker.length - 1]);
+        stackerTracker.splice(stackerTracker[stackerTracker.length - 1], 1);
       }
       return popped;
     };
@@ -64,5 +64,6 @@
 // console.log('size before pop', example.size());
 // console.log('popped', example.pop());
 // console.log('size after pop', example.size());
+// example.pop();
 // example.pop();
 // console.log('min after pop', example.min());
