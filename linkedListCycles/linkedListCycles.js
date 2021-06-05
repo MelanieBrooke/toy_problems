@@ -38,14 +38,14 @@ var Node = function(value) {
 // changing input variable name for my own sake, change back if specbot disapproves
 // var hasCycle = function(linkedList) {
 var hasCycle = function(node) {
-  if (!node.next) {
+  if (!node.next || !node.next.next) {
     return false;
   }
   var result = false;
   var slow = node;
   var fast = node;
   while (true) {
-    if (!fast.next || !slow.next) {
+    if (!fast.next.next || !slow.next) {
       return false;
     }
     slow = slow.next;
@@ -89,3 +89,34 @@ var hasCycle = function(node) {
 // nodeE.next = nodeB;
 // console.log(hasCycle(nodeE)); // => true
 // console.log(hasCycle(nodeC)); // => true
+
+
+
+//   // aka, start -> tail0 -> tail1 -> ... -> tail99998 -> tail99999 -> null
+// var startNode = Node('start');
+// var currentNode = startNode; // one. million nodes!! wahahahaha
+// for (var i = 0; i < 999999; i++) {
+//   currentNode.next = Node('tail' + i);
+//   currentNode = currentNode.next;
+// }
+// // console.log(startNode);
+// console.log(hasCycle(startNode)); // => false
+
+
+// // aka, start -> tail0 -> tail1 -> ... -> tail8 -> null
+// var startNode = Node('start');
+// var currentNode = startNode;
+// for (var i = 0; i < 9; i++) {
+//   currentNode.next = Node('tail' + i);
+//   currentNode = currentNode.next;
+// }
+// // console.log(startNode);
+// console.log(hasCycle(startNode)); // => false
+
+
+
+// // aka, A -> B -> null
+// var nodeA = Node('A');
+// var nodeB = nodeA.next = Node('B');
+// // console.log(nodeA);
+// console.log(hasCycle(nodeA)); // => false
