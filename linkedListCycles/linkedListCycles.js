@@ -38,19 +38,12 @@ var Node = function(value) {
 // changing input variable name for my own sake, change back if specbot disapproves
 // var hasCycle = function(linkedList) {
 var hasCycle = function(node) {
-  // if there is nothing to move on to, just return false
   if (!node.next) {
     return false;
   }
-
-  // declare result variable and pointers
   var result = false;
   var slow = node;
   var fast = node;
-  // have the pointers iterate through the list
-  // if they meet up, return true
-  // if they hit a null for next, return false
-  // I'm risking this while loop because I think all the bases are covered?? WE SHALL SEE
   while (true) {
     if (!fast.next || !slow.next) {
       return false;
@@ -76,11 +69,23 @@ var hasCycle = function(node) {
 
 
 
-var nodeA = Node('A');
-var nodeB = nodeA.next = Node('B');
-var nodeC = nodeB.next = Node('C');
-var nodeD = nodeC.next = Node('D');
-var nodeE = nodeD.next = Node('E');
-console.log(hasCycle(nodeA)); // => false
-nodeE.next = nodeB;
-console.log(hasCycle(nodeA)); // => true
+// var nodeA = Node('A');
+// var nodeB = nodeA.next = Node('B');
+// var nodeC = nodeB.next = Node('C');
+// var nodeD = nodeC.next = Node('D');
+// var nodeE = nodeD.next = Node('E');
+// console.log(hasCycle(nodeA)); // => false
+// nodeE.next = nodeB;
+// console.log(hasCycle(nodeA)); // => true
+
+// var nodeA = Node('A');
+// console.log(hasCycle(nodeA)); // => false
+
+// var nodeA = Node('A');
+// var nodeB = nodeA.next = Node('B');
+// var nodeC = nodeB.next = Node('C');
+// var nodeD = nodeC.next = Node('D');
+// var nodeE = nodeD.next = Node('E');
+// nodeE.next = nodeB;
+// console.log(hasCycle(nodeE)); // => true
+// console.log(hasCycle(nodeC)); // => true
