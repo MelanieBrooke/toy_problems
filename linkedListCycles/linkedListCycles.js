@@ -45,7 +45,7 @@ var hasCycle = function(node) {
   var slow = node;
   var fast = node;
   while (true) {
-    if (!fast.next.next || !slow.next) {
+    if (!fast.next || !fast.next.next) {
       return false;
     }
     slow = slow.next;
@@ -69,54 +69,3 @@ var hasCycle = function(node) {
 
 
 
-// var nodeA = Node('A');
-// var nodeB = nodeA.next = Node('B');
-// var nodeC = nodeB.next = Node('C');
-// var nodeD = nodeC.next = Node('D');
-// var nodeE = nodeD.next = Node('E');
-// console.log(hasCycle(nodeA)); // => false
-// nodeE.next = nodeB;
-// console.log(hasCycle(nodeA)); // => true
-
-// var nodeA = Node('A');
-// console.log(hasCycle(nodeA)); // => false
-
-// var nodeA = Node('A');
-// var nodeB = nodeA.next = Node('B');
-// var nodeC = nodeB.next = Node('C');
-// var nodeD = nodeC.next = Node('D');
-// var nodeE = nodeD.next = Node('E');
-// nodeE.next = nodeB;
-// console.log(hasCycle(nodeE)); // => true
-// console.log(hasCycle(nodeC)); // => true
-
-
-
-//   // aka, start -> tail0 -> tail1 -> ... -> tail99998 -> tail99999 -> null
-// var startNode = Node('start');
-// var currentNode = startNode; // one. million nodes!! wahahahaha
-// for (var i = 0; i < 999999; i++) {
-//   currentNode.next = Node('tail' + i);
-//   currentNode = currentNode.next;
-// }
-// // console.log(startNode);
-// console.log(hasCycle(startNode)); // => false
-
-
-// // aka, start -> tail0 -> tail1 -> ... -> tail8 -> null
-// var startNode = Node('start');
-// var currentNode = startNode;
-// for (var i = 0; i < 9; i++) {
-//   currentNode.next = Node('tail' + i);
-//   currentNode = currentNode.next;
-// }
-// // console.log(startNode);
-// console.log(hasCycle(startNode)); // => false
-
-
-
-// // aka, A -> B -> null
-// var nodeA = Node('A');
-// var nodeB = nodeA.next = Node('B');
-// // console.log(nodeA);
-// console.log(hasCycle(nodeA)); // => false
